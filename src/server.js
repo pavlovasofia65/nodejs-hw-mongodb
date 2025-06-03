@@ -47,7 +47,7 @@ export const setupServer = () =>{
         });
     });
 
-    app.use('*', (erq, res, next) => {
+    app.use((req, res, next) => {
         res.status(400).json({
             message: 'Contact not found',
         });
