@@ -60,7 +60,8 @@ export const patchContactController = async (req, res, next) => {
     });
 };
 
-export const getContactsController = async (req, res) => {
+export const getContactsController = async (req, res, next) => {
+    try {
     const { page, perPage } = parsePaginationParams(req.query);
     const { sortBy, sortOrder } = parseSortParams(req.query);
     const contacts = await getAllContacts({ page, perPage, sortBy, sortOrder });
@@ -69,4 +70,7 @@ export const getContactsController = async (req, res) => {
         message: 'Successfully found contacts!',
         data: contacts,
     });
+    } catch (err) {
+        next(err);
+    }
 };

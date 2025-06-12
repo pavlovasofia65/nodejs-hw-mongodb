@@ -3,15 +3,15 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { createStudentSchema, updateStudentSchema } from '../validation/students.js';
-import {
-    getAllContactsController, 
+import { 
     getContactByIdController, 
     createContactController,
     deleteContactController,
-    patchContactController
+    patchContactController,
+    getContactsController
 } from '../controllers/contacts.js';
 const router = Router();
-router.get('/contacts', ctrlWrapper(getAllContactsController));
+router.get('/contacts', ctrlWrapper(getContactsController));
 
 router.get('/contacts/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 
