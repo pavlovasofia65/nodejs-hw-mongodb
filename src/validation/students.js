@@ -1,6 +1,11 @@
 import Joi from 'joi';
 export const createStudentSchema = Joi.object({
-    name: Joi.string().min(3).max(20).required(),
+    name: Joi.string().min(3).max(20).required().messages({
+        'string.base': "Contact's name should be a string",
+        'string.min': "Contact's name should have at least {#limit} characters",
+        'string.max': "Contact's name should have at most {#limit} characters",
+        'any.required': "Contact's name is required",
+    }),
     phoneNumber: Joi.number().min(8).max(15).required(),
     email: Joi.string().email(),
     isFavourite: Joi.boolean(),
