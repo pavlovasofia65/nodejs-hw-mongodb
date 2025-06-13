@@ -14,7 +14,7 @@ export const getAllContacts = async({ page = 1, perPage = 10, sortOrder = SORT_O
     const contacts = await contactsQuery
         .skip(skip)
         .limit(limit)
-        .sort({ [sortBy]: sortOrder })
+        .sort({ [sortBy]: sortOrder === 'desc' ? -1 : 1 })
         .exec();
 
     const paginationData = calculatePaginationData(contactsCount, perPage, page);
