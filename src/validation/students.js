@@ -6,7 +6,7 @@ export const createStudentSchema = Joi.object({
         'string.max': "Contact's name should have at most {#limit} characters",
         'any.required': "Contact's name is required",
     }),
-    phoneNumber: Joi.number().min(8).max(15).required(),
+    phoneNumber: Joi.string().min(8).max(15).required(),
     email: Joi.string().email(),
     isFavourite: Joi.boolean(),
     contactType: Joi.string().valid('work', 'home', 'personal').required(),
@@ -14,7 +14,7 @@ export const createStudentSchema = Joi.object({
 
 export const updateStudentSchema = Joi.object({
     name: Joi.string().min(3).max(30),
-    phoneNumber: Joi.number().min(8).max(15).required(),
+    phoneNumber: Joi.string().min(8).max(15).required(),
     email: Joi.string().email(),
     isFavourite: Joi.boolean(),
     contactType: Joi.string().valid('work', 'home', 'personal').required(),
