@@ -13,22 +13,34 @@ export const getAllContactsController = async (req, res) => {
 };
 
 export const getContactByIdController = async (req, res, next) => {
-    const {contactId} = req.params;
-    const contact = await getContactById(contactId);
-    
-    if (!contact){
-        throw createHttpError(404, 'Student not found');
-    }
+    try {
+        const { contactId } = req.params;
+        const { _id: userId } = req.user;
 
-    res.json({
-        status: 200,
-        message: `Successfully found contact with id ${contactId}!`,
-        data: contact,
-    });
+        const contact = await getContactById(contactId, userId);
+
+        if (!contact) {
+            throw createHttpError(404, 'Contact not found');
+        }
+
+        res.json({
+            status: 200,
+            message: `Successfully found contact with id ${contactId}!`,
+            data: contact,
+        });
+    } catch (err) {
+        next(err);
+    }
 };
 
 export const createContactController = async (req, res) => {
-    const contact = await createContact(req.body);
+    const { _id: userId } = req.user;
+
+    const contact = await createContact({
+        ...req.body,
+        userId,
+    });
+
     res.status(201).json({
         status: 201,
         message: 'Successfully created a contact!',
@@ -62,14 +74,23 @@ export const patchContactController = async (req, res, next) => {
 
 export const getContactsController = async (req, res, next) => {
     try {
-    const { page, perPage } = parsePaginationParams(req.query);
-    const { sortBy, sortOrder } = parseSortParams(req.query);
-    const contacts = await getAllContacts({ page, perPage, sortBy, sortOrder });
-    res.json({
-        status: 200,
-        message: 'Successfully found contacts!',
-        data: contacts,
-    });
+        const { _id: userId } = req.user;
+        const { page, perPage } = parsePaginationParams(req.query);
+        const { sortBy, sortOrder } = parseSortParams(req.query);
+
+        const contacts = await getAllContacts({
+            userId,
+            page,
+            perPage,
+            sortBy,
+            sortOrder,
+        });
+
+        res.json({
+            status: 200,
+            message: 'Successfully found contacts!',
+            data: contacts,
+        });
     } catch (err) {
         next(err);
     }
