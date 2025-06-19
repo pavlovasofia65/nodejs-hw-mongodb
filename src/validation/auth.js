@@ -11,7 +11,7 @@ export const loginUserSchema = Joi.object({
     password: Joi.string().required(),
 });
 
-export const requestResetEmailSchema = Joi.onject({
+export const requestResetEmailSchema = Joi.object({
     email: Joi.string().email().required(),
 });
 
