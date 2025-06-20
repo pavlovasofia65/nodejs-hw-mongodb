@@ -1,0 +1,15 @@
+description: Unauthorized - Access token is missing or invalid
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: Unauthorized access. Please provide a valid token.
