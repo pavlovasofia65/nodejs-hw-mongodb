@@ -4,6 +4,10 @@ required:
   - phoneNumber
   - contactType
 properties:
+  _id:
+    description: "Unique identifier of the contact"
+    type: string
+    example: 65e4decdd286b30065d54af9
   name:
     description: "Contact's name"
     type: string
@@ -11,7 +15,7 @@ properties:
   phoneNumber:
     description: "Contact's phone number"
     type: number
-    example: +37177888888
+    example: 37177888888
   contactType:
     description: "Contact's type"
     type: string
