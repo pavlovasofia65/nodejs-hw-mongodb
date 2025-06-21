@@ -1,4 +1,4 @@
-#/swagger/paths/students/post.yaml
+#/swagger/paths/contacts/post.yaml
 
 tags:
   - Contacts
@@ -24,7 +24,7 @@ requestBody:
           phoneNumber:
             description: "Contact's phone number"
             type: number
-            example: +37177888888
+            example: 37177888888
           contactType:
             description: "Contact's type"
             type: string
@@ -37,10 +37,6 @@ requestBody:
             description: 'Whether is contact favourite'
             type: boolean
             example: false
-          userId:
-            description: "Contact's id"
-            type: string
-            example: 65e4decdd286b30065d54af9
           photo:
             description: "Contact's photo"
             type: string
